@@ -126,11 +126,13 @@ function renderScores(s) {
 
   keys.forEach(function(key) {
     var count = dist[key];
+    if (count === 0) return;
+
     var pct = (count / maxVal) * 100;
     var isMax = count === maxVal && maxVal > 0;
 
     var row = document.createElement('div');
-    row.className = 'score-row' + (count === 0 ? ' score-zero' : '') + (isMax ? ' score-max' : '');
+    row.className = 'score-row' + (isMax ? ' score-max' : '');
 
     var range = document.createElement('div');
     range.className = 'score-range';
@@ -142,7 +144,7 @@ function renderScores(s) {
 
     var bar = document.createElement('div');
     bar.className = 'score-bar';
-    bar.style.width = (count === 0 ? 0 : Math.max(pct, 2)) + '%';
+    bar.style.width = Math.max(pct, 2) + '%';
     wrap.appendChild(bar);
     row.appendChild(wrap);
 
