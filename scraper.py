@@ -89,10 +89,12 @@ def parse_page():
         by_comp = parse_num(cells[9].text)
 
         dist = {}
-        for i, cell in enumerate(cells[10:]):
-            if i < len(score_ranges):
-                val = cell.text.strip().replace('\xa0', '')
-                dist[score_ranges[i]] = parse_num(val)
+        for range_str, cell in zip(score_ranges, cells[10:]):
+            m = re.match(r'(\d+)', range_str)
+            if m and int(m.group(1)) > 300:
+                continue
+            val = cell.text.strip().replace('\xa0', '')
+            dist[range_str] = parse_num(val)
 
         specialties.append({
             'faculty': current_faculty,
