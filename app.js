@@ -4,7 +4,7 @@ async function loadData() {
   const specsEl = document.getElementById('specialties');
 
   try {
-    const res = await fetch('data.json');
+    const res = await fetch('data.json?_=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     renderMeta(data, metaEl, badgesEl);
