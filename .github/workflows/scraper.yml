@@ -24,13 +24,40 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4
 
+      - name: Save old data
+        run: |
+          if [ -f data.json ]; then
+            cp data.json data.old.json
+          fi
+
       - name: Run scraper
         run: python scraper.py
 
-      - name: Commit and push
+      - name: Check if data changed
+        id: changed
+        run: |
+          if [ ! -f data.old.json ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python -c "
+import json
+with open('data.json') as f: new = json.load(f)
+with open('data.old.json') as f: old = json.load(f)
+n = {k:v for k,v in new.items() if k != 'fetched_at'}
+o = {k:v for k,v in old.items() if k != 'fetched_at'}
+import sys
+sys.exit(0 if json.dumps(n,sort_keys=True) != json.dumps(o,sort_keys=True) else 1)
+" && echo "changed=true" >> "$GITHUB_OUTPUT" || echo "changed=false" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push if changed
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          PAT: ${{ secrets.PAT }}
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${PAT}@github.com/${{ github.repository }}
           git add data.json
-          git diff --staged --quiet || git commit -m "Auto-update data.json"
+          git diff --staged --quiet || git commit -m "Auto-update $(date -u '+%Y-%m-%d %H:%M')"
           git push
