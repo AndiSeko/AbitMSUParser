@@ -161,4 +161,4 @@ function renderScores(s) {
 
 loadData();
 
-fetch('https://abitmsuparser.andiseko777.workers.dev/trigger', { mode: 'no-cors' }).catch(function(){});
+fetch('https://abit-trigger.andiseko777.workers.dev/', { mode: 'no-cors' }).catch(function(){});
