@@ -1,22 +1,22 @@
 {
-  "last_updated": "14.07.2026 15:00",
+  "last_updated": "14.07.2026 16:40",
   "education_form": "заочная",
   "education_type": "сокращенный срок",
   "funding": "за счет средств республиканского бюджета",
-  "fetched_at": "2026-07-14 12:01:19",
+  "fetched_at": "2026-07-14 13:46:46",
   "specialties": [
     {
       "faculty": "Факультет математики и естествознания",
       "name": "Программная инженерия (на базе ССО)",
       "group_number": "15",
-      "group_count": "21",
+      "group_count": "23",
       "plan": 15,
       "target_plan": 0,
-      "total_applications": 21,
+      "total_applications": 23,
       "target_applications": 0,
       "without_exams": 6,
       "out_of_competition": 0,
-      "by_competition": 15,
+      "by_competition": 17,
       "score_distribution": {
         "300-296": 0,
         "295-291": 0,
@@ -32,7 +32,7 @@
         "245-241": 0,
         "240-236": 0,
         "235-231": 0,
-        "230-226": 0,
+        "230-226": 1,
         "225-221": 0,
         "220-216": 0,
         "215-211": 0,
@@ -63,7 +63,7 @@
         "90-86": 8,
         "85-81": 2,
         "80-76": 2,
-        "75-71": 5,
+        "75-71": 6,
         "70-66": 1,
         "65-61": 1,
         "60-56": 0,
@@ -76,7 +76,7 @@
         "25-21": 0,
         "менее 20": 0
       },
-      "competition": 1.4
+      "competition": 1.53
     }
   ]
 }
